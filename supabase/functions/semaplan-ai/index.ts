@@ -1,4 +1,8 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import {
+  Construir_Obra_Compacta_Decoteca,
+  Seleccionar_Pagina_Decoteca,
+} from "./decoteca_paginacion.mjs";
 
 type Mapa = Record<string, unknown>;
 
@@ -320,7 +324,7 @@ function Construir_OpenAPI_Semaplan_IA(
     openapi: "3.1.0",
     info: {
       title: "Semaplan AI Gateway",
-      version: "2.2.0",
+      version: "2.3.0",
       description:
         "API para leer Semaplan y ejecutar acciones B2 desde ChatGPT.",
     },
@@ -360,6 +364,38 @@ function Construir_OpenAPI_Semaplan_IA(
             "Ok",
             "Error",
             "Detalle",
+          ],
+          additionalProperties: true,
+        },
+        SemaplanRespuestaBusqueda: {
+          type: "object",
+          properties: {
+            Ok: { type: "boolean", example: true },
+            Query: { type: "string" },
+            Modulo: { type: "string" },
+            Total: { type: "integer", minimum: 0 },
+            Offset: { type: "integer", minimum: 0 },
+            Limite: { type: "integer", minimum: 1 },
+            Hay_Mas: { type: "boolean" },
+            Siguiente_Offset: {
+              type: ["integer", "null"],
+              minimum: 0,
+            },
+            Filtros: { type: "object" },
+            Compacto: { type: "boolean" },
+            Resultados: {
+              type: "array",
+              items: { type: "object" },
+            },
+          },
+          required: [
+            "Ok",
+            "Total",
+            "Offset",
+            "Limite",
+            "Hay_Mas",
+            "Siguiente_Offset",
+            "Resultados",
           ],
           additionalProperties: true,
         },
@@ -844,9 +880,64 @@ function Construir_OpenAPI_Semaplan_IA(
               in: "query",
               schema: { type: "integer", minimum: 1, maximum: 100 },
             },
+            {
+              name: "offset",
+              in: "query",
+              description:
+                "Cantidad de resultados que se deben saltar. Por defecto 0. Para Decoteca se aplica despues de los filtros y del orden estable.",
+              schema: {
+                type: "integer",
+                minimum: 0,
+                default: 0,
+              },
+            },
+            {
+              name: "filtros",
+              in: "query",
+              style: "deepObject",
+              explode: true,
+              description:
+                "Filtros explicitos de Decoteca. Se combinan con AND.",
+              schema: {
+                type: "object",
+                properties: {
+                  descripcion_vacia: { type: "boolean" },
+                  creador_vacio: { type: "boolean" },
+                  anio_vacio: { type: "boolean" },
+                  genero_vacio: { type: "boolean" },
+                  subgenero_vacio: { type: "boolean" },
+                  portada_vacia: { type: "boolean" },
+                  total_unidades_cero: { type: "boolean" },
+                  estado: { type: "string" },
+                  periodo: { type: "string" },
+                  prioridad: { type: "string" },
+                },
+                additionalProperties: false,
+              },
+            },
+            {
+              name: "compacto",
+              in: "query",
+              description:
+                "En Decoteca omite registros, partes, metadatos e imagenes codificadas. Por defecto false para compatibilidad.",
+              schema: {
+                type: "boolean",
+                default: false,
+              },
+            },
           ],
           responses: {
-            "200": Respuesta_200,
+            "200": {
+              description: "Respuesta de busqueda y paginacion.",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref:
+                      "#/components/schemas/SemaplanRespuestaBusqueda",
+                  },
+                },
+              },
+            },
             "400": Respuesta_Error,
             "401": Respuesta_Error,
             "403": Respuesta_Error,
@@ -2030,6 +2121,87 @@ function Resolver_Limite(
     return Default;
   }
   return Math.min(Maximo, Numero);
+}
+
+function Resolver_Offset(Url: URL) {
+  const Raw = String(
+    Url.searchParams.get("offset") || ""
+  ).trim();
+  if (!Raw) return 0;
+  const Numero = Math.floor(Number(Raw));
+  if (!Number.isFinite(Numero) || Numero < 0) return 0;
+  return Numero;
+}
+
+function Resolver_Filtros_Decoteca(Url: URL) {
+  const Filtros: Mapa = {};
+  const Raw = Normalizar_Texto(
+    Url.searchParams.get("filtros")
+  );
+  if (Raw) {
+    try {
+      const Parseados = JSON.parse(Raw);
+      if (Es_Mapa_B2(Parseados)) {
+        Object.assign(Filtros, Parseados);
+      }
+    } catch (_) {
+      // Tambien se admite la sintaxis deepObject de OpenAPI.
+    }
+  }
+  Url.searchParams.forEach((Valor, Clave) => {
+    const Coincidencia = Clave.match(/^filtros\[([^\]]+)\]$/);
+    if (Coincidencia) {
+      Filtros[Coincidencia[1]] = Valor;
+    }
+  });
+  [
+    "descripcion_vacia",
+    "creador_vacio",
+    "anio_vacio",
+    "genero_vacio",
+    "subgenero_vacio",
+    "portada_vacia",
+    "total_unidades_cero",
+    "estado",
+    "periodo",
+    "prioridad",
+  ].forEach((Clave) => {
+    if (
+      !Object.prototype.hasOwnProperty.call(Filtros, Clave) &&
+      Url.searchParams.has(Clave)
+    ) {
+      Filtros[Clave] = Url.searchParams.get(Clave);
+    }
+  });
+  [
+    "descripcion_vacia",
+    "creador_vacio",
+    "anio_vacio",
+    "genero_vacio",
+    "subgenero_vacio",
+    "portada_vacia",
+    "total_unidades_cero",
+  ].forEach((Clave) => {
+    if (!Object.prototype.hasOwnProperty.call(Filtros, Clave)) {
+      return;
+    }
+    const Valor = Filtros[Clave];
+    if (typeof Valor === "boolean") return;
+    const Texto = Normalizar_Texto_Busqueda(Valor);
+    if (["true", "1", "si"].includes(Texto)) {
+      Filtros[Clave] = true;
+    } else if (["false", "0", "no"].includes(Texto)) {
+      Filtros[Clave] = false;
+    }
+  });
+  return Filtros;
+}
+
+function Resolver_Compacto_Decoteca(Url: URL) {
+  const Payload: Mapa = {
+    compacto: Url.searchParams.get("compacto"),
+  };
+  return Leer_Boolean_B2(Payload, false, "compacto");
 }
 
 function Resolver_Fecha_Referencia(
@@ -5867,7 +6039,37 @@ function Responder_Busqueda_Global(
   }
   const Texto = Normalizar_Texto_Busqueda(Query);
   const Limite = Resolver_Limite(Url, 30, 100);
+  const Offset = Resolver_Offset(Url);
+  const Filtros = Resolver_Filtros_Decoteca(Url);
+  const Compacto = Resolver_Compacto_Decoteca(Url);
   const Resultados: Mapa[] = [];
+  if (Modulo === "decoteca") {
+    const Decoteca = Construir_Resultados_Decoteca_Busqueda(
+      Estado,
+      Url,
+      Texto,
+      {
+        Paginado: true,
+        Compacto,
+        Filtros,
+        Offset,
+        Limite,
+      },
+    );
+    return Responder_Json({
+      Ok: true,
+      Query,
+      Modulo,
+      Resultados: Decoteca.Resultados,
+      Total: Decoteca.Total,
+      Offset: Decoteca.Offset,
+      Limite: Decoteca.Limite,
+      Hay_Mas: Decoteca.Hay_Mas,
+      Siguiente_Offset: Decoteca.Siguiente_Offset,
+      Filtros,
+      Compacto,
+    });
+  }
   if (Modulo === "todos") Construir_Tareas_Normalizadas_IA(Estado).forEach((Tarea) => {
     if (Normalizar_Texto_Busqueda([Tarea.Nombre, Tarea.Cajon].join(" ")).includes(Texto)) {
       Resultados.push({
@@ -5911,8 +6113,20 @@ function Responder_Busqueda_Global(
       }
     });
   }
-  Construir_Resultados_Decoteca_Busqueda(Estado, Url, Texto).forEach(
-    (Resultado) => Resultados.push(Resultado)
+  const Decoteca = Construir_Resultados_Decoteca_Busqueda(
+    Estado,
+    Url,
+    Texto,
+    {
+      Paginado: false,
+      Compacto: false,
+      Filtros: {},
+      Offset: 0,
+      Limite: Number.MAX_SAFE_INTEGER,
+    },
+  );
+  Decoteca.Resultados.forEach((Resultado) =>
+    Resultados.push(Resultado)
   );
   return Responder_Json({
     Ok: true,
@@ -5926,7 +6140,14 @@ function Responder_Busqueda_Global(
 function Construir_Resultados_Decoteca_Busqueda(
   Estado: Record<string, unknown>,
   Url: URL,
-  Texto: string
+  Texto: string,
+  Opciones: {
+    Paginado: boolean;
+    Compacto: boolean;
+    Filtros: Mapa;
+    Offset: number;
+    Limite: number;
+  }
 ) {
   const Decoteca = Leer_Decoteca_B2(Estado as Mapa);
   const Teca_Filtro = Normalizar_Teca_Id_Decoteca_B2(
@@ -5943,7 +6164,7 @@ function Construir_Resultados_Decoteca_Busqueda(
     Lista.push({ ...Avance });
     Avances_Por_Obra.set(Obra_Id, Lista);
   });
-  return Decoteca.Obras.filter((Obra) => {
+  const Obras_Con_Texto = Decoteca.Obras.filter((Obra) => {
     const Teca_Id = String(Obra.Teca_Id || "").trim();
     if (Teca_Filtro && Teca_Id !== Teca_Filtro) return false;
     const Metadatos = Array.isArray(Obra.Metadatos)
@@ -5967,7 +6188,17 @@ function Construir_Resultados_Decoteca_Busqueda(
       Metadatos,
       Partes,
     ].join(" ")).includes(Texto);
-  }).map((Obra) => {
+  });
+  const Pagina = Seleccionar_Pagina_Decoteca({
+    Obras: Obras_Con_Texto,
+    Teca_Id: "",
+    Filtros: Opciones.Paginado ? Opciones.Filtros : {},
+    Offset: Opciones.Paginado ? Opciones.Offset : 0,
+    Limite: Opciones.Paginado
+      ? Opciones.Limite
+      : Math.max(1, Decoteca.Obras.length),
+  });
+  const Resultados = Pagina.Obras.map((Obra) => {
     const Copia_Obra = { ...Obra };
     delete Copia_Obra.Portada_Data_Url;
     delete Copia_Obra.Portada_Data;
@@ -5976,16 +6207,34 @@ function Construir_Resultados_Decoteca_Busqueda(
     delete Copia_Obra.Portada_Metodo_Local;
     const Teca_Id = String(Obra.Teca_Id || "").trim();
     const Teca = Tecas_Por_Id.get(Teca_Id) || {};
-    return {
+    const Obra_Respuesta = Opciones.Compacto
+      ? Construir_Obra_Compacta_Decoteca(Obra)
+      : Copia_Obra;
+    const Respuesta: Mapa = {
       Tipo: "Obra_Decoteca",
       Id: Obra.Id,
       Teca_Id,
       Teca: Teca.Nombre || Teca_Id,
       Nombre: Obra.Titulo || "",
-      Obra: Copia_Obra,
-      Registros: Avances_Por_Obra.get(String(Obra.Id || "")) || [],
+      Obra: Obra_Respuesta,
     };
+    if (!Opciones.Compacto) {
+      Respuesta.Registros =
+        Avances_Por_Obra.get(String(Obra.Id || "")) || [];
+    } else {
+      Respuesta.Registros_Total =
+        (Avances_Por_Obra.get(String(Obra.Id || "")) || []).length;
+    }
+    return Respuesta;
   });
+  return {
+    Resultados,
+    Total: Pagina.Total,
+    Offset: Pagina.Offset,
+    Limite: Pagina.Limite,
+    Hay_Mas: Pagina.Hay_Mas,
+    Siguiente_Offset: Pagina.Siguiente_Offset,
+  };
 }
 
 function Responder_Resumen_Operativo(

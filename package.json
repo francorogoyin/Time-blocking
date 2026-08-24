@@ -14,6 +14,7 @@
     "test:planes-semana": "node --test Pruebas/Tests/Planes_Semana_Independiente.test.js",
     "test:nutrifit": "node --test Pruebas/Tests/Nutrifit_Modelo.test.js",
     "test:decoteca-listas": "node --test Pruebas/Tests/Decoteca_Listas.test.js",
+    "test:semaplan-ai-decoteca": "node --test Pruebas/Tests/Semaplan_AI_Decoteca_Paginacion.test.js",
     "test:smoke:prod": "node --test Pruebas/Tests/Smoke_Produccion.test.js"
   },
   "devDependencies": {

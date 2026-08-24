@@ -19,6 +19,30 @@ Acciones de lectura.
   de la teca y registros. Los datos locales de archivos de portada no
   se exponen.
 
+Para recorrer una teca grande, usar `offset` y `limite`. El orden de
+Decoteca es estable por `Orden` y luego `Id`, y la respuesta devuelve
+`Total`, `Offset`, `Limite`, `Hay_Mas` y `Siguiente_Offset`. El filtro
+`filtros[descripcion_vacia]: true` devuelve solo obras sin descripción;
+también existen filtros de creador, año, género, subgénero, portada,
+total de unidades, estado, período y prioridad. `compacto: true` omite
+historiales, partes completas, metadatos e imágenes codificadas.
+
+Ejemplo de consulta por lotes:
+
+```json
+{
+  "modulo": "decoteca",
+  "teca_id": "Biblioteca",
+  "filtros": {"descripcion_vacia": true},
+  "offset": 0,
+  "limite": 5,
+  "compacto": true
+}
+```
+
+Tras editar las obras recibidas, repetir con `offset: 0` y el mismo
+filtro para que las obras ya completadas no vuelvan a aparecer.
+
 Lotes B2.
 
 `semaplan_b2_lote_operaciones` admite hasta 50 operaciones atómicas.

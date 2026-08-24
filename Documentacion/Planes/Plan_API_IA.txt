@@ -471,7 +471,26 @@ Reglas:
 - `limite` default 20;
 - `limite` maximo 50.
 
-### 11. `GET /baul?categoria=<texto>&estado=<texto>&limite=100`
+### 11. `GET /buscar`
+
+Uso:
+buscar transversalmente o consultar Decoteca por teca, filtros y lotes.
+
+Para Decoteca usar `modulo=decoteca` y, opcionalmente, `teca_id`.
+`limite` acepta hasta 100 resultados y `offset` indica cuántos resultados
+ordenados se deben saltar; si se omite, vale 0. El orden de Decoteca es
+estable por `Orden` y luego `Id`.
+
+Filtros explícitos disponibles:
+
+- `descripcion_vacia`, `creador_vacio`, `anio_vacio`;
+- `genero_vacio`, `subgenero_vacio`, `portada_vacia`;
+- `total_unidades_cero`, `estado`, `periodo` y `prioridad`.
+
+Para respuestas pequeñas usar `compacto=true`. La respuesta de Decoteca
+incluye `Total`, `Offset`, `Limite`, `Hay_Mas` y `Siguiente_Offset`.
+
+### 12. `GET /baul?categoria=<texto>&estado=<texto>&limite=100`
 
 Uso:
 leer objetivos del Baul.
@@ -498,7 +517,7 @@ Respuesta:
 }
 ```
 
-### 12. `GET /metas?limite=50`
+### 13. `GET /metas?limite=50`
 
 Uso:
 leer metas visibles y resumidas.
@@ -523,7 +542,7 @@ Respuesta:
 }
 ```
 
-### 13. `GET /openapi.json`
+### 14. `GET /openapi.json`
 
 Uso:
 servir esquema OpenAPI minimo para GPT Actions.

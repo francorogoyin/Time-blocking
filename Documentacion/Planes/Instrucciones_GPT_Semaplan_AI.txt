@@ -75,6 +75,29 @@ Acciones de lectura disponibles.
 - `semaplan_buscar_global`, con `modulo=decoteca`, para obras, tecas,
   metadatos, partes, estadísticas y registros de Decoteca.
 
+Paginación y lotes de Decoteca.
+
+En `semaplan_buscar_global`, cuando `modulo=decoteca`, usar `limite` y
+`offset`. El `offset` empieza en 0 y se aplica después de los filtros y
+del orden estable de la teca. La respuesta incluye `Total`, `Offset`,
+`Limite`, `Hay_Mas` y `Siguiente_Offset`.
+
+Para campos vacíos usar el filtro explícito, no una búsqueda textual. Por
+ejemplo, pedir las primeras cinco obras de Biblioteca sin descripción con
+`filtros[descripcion_vacia]=true`, `offset=0` y `limite=5`. También están
+disponibles `creador_vacio`, `anio_vacio`, `genero_vacio`,
+`subgenero_vacio`, `portada_vacia`, `total_unidades_cero`, `estado`,
+`periodo` y `prioridad`.
+
+Para reducir el tamaño de la respuesta usar `compacto=true`. Ese modo
+conserva la identidad y los campos de catálogo necesarios, pero omite
+registros de avance, partes completas, metadatos e imágenes codificadas.
+El modo compacto es recomendable para listados por lotes.
+
+Después de editar un lote de obras, volver a consultar con `offset=0` y
+el mismo filtro. Las obras ya completadas dejarán de coincidir y la
+siguiente tanda ocupará naturalmente los primeros resultados.
+
 Acciones B2 de escritura disponibles.
 
 - `semaplan_b2_crear_tarea`.

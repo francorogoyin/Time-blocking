@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Semaplan AI Gateway
-  version: 2.0.0
+  version: 2.3.0
   description: API para leer Semaplan y ejecutar acciones B2 desde ChatGPT.
 servers:
   - url: https://cprdnxkkhuuhdispubds.supabase.co/functions/v1/semaplan-ai
@@ -44,6 +44,49 @@ components:
         - Ok
         - Error
         - Detalle
+      additionalProperties: true
+    SemaplanRespuestaBusqueda:
+      type: object
+      properties:
+        Ok:
+          type: boolean
+          example: true
+        Query:
+          type: string
+        Modulo:
+          type: string
+        Total:
+          type: integer
+          minimum: 0
+        Offset:
+          type: integer
+          minimum: 0
+        Limite:
+          type: integer
+          minimum: 1
+        Hay_Mas:
+          type: boolean
+        Siguiente_Offset:
+          type:
+            - integer
+            - 'null'
+          minimum: 0
+        Filtros:
+          type: object
+        Compacto:
+          type: boolean
+        Resultados:
+          type: array
+          items:
+            type: object
+      required:
+        - Ok
+        - Total
+        - Offset
+        - Limite
+        - Hay_Mas
+        - Siguiente_Offset
+        - Resultados
       additionalProperties: true
 paths:
   /salud:
@@ -365,6 +408,98 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SemaplanRespuestaExitosa"
+  /buscar:
+    get:
+      operationId: semaplan_buscar_global
+      summary: Buscar y paginar resultados de Semaplan y Decoteca
+      description: >-
+        Para Decoteca, usar modulo=decoteca y teca_id. La paginacion se aplica
+        despues de los filtros y del orden estable Orden, Id. El parametro
+        filtros usa sintaxis deepObject, por ejemplo
+        filtros[descripcion_vacia]=true.
+      security:
+        - SemaplanAIOAuth:
+            - read
+      parameters:
+        - name: q
+          in: query
+          description: Texto a buscar. Se puede omitir al listar Decoteca.
+          schema:
+            type: string
+            maxLength: 200
+        - name: modulo
+          in: query
+          schema:
+            type: string
+            enum: [todos, decoteca]
+            default: todos
+        - name: teca_id
+          in: query
+          description: Biblioteca, Musicoteca, Videoteca, Ludoteca o una teca personalizada.
+          schema:
+            type: string
+        - name: limite
+          in: query
+          description: Cantidad maxima de resultados. Por defecto 30 y maximo 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Cantidad de resultados que se deben saltar. Por defecto 0.
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: filtros
+          in: query
+          style: deepObject
+          explode: true
+          description: Filtros explicitos de Decoteca combinados con AND.
+          schema:
+            type: object
+            properties:
+              descripcion_vacia:
+                type: boolean
+              creador_vacio:
+                type: boolean
+              anio_vacio:
+                type: boolean
+              genero_vacio:
+                type: boolean
+              subgenero_vacio:
+                type: boolean
+              portada_vacia:
+                type: boolean
+              total_unidades_cero:
+                type: boolean
+              estado:
+                type: string
+              periodo:
+                type: string
+              prioridad:
+                type: string
+            additionalProperties: false
+        - name: compacto
+          in: query
+          description: Omite registros, partes, metadatos e imagenes codificadas en Decoteca.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: Respuesta paginada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SemaplanRespuestaBusqueda"
+        "400":
+          description: Parametros invalidos.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SemaplanRespuestaError"
   /b2/tareas/crear:
     post:
       operationId: semaplan_b2_crear_tarea
