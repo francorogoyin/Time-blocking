@@ -372,7 +372,7 @@ test("no duplica la carga de divisiones internas anidadas", () => {
   assert.equal(Resultado.Items_Medidos, 1);
 });
 
-test("prorratea páginas y toma sólo los registros de la semana", () => {
+test("prorratea páginas y toma sólo los registros del trimestre", () => {
   const Sub = {
     Id: "Sub",
     Target_Total: 400,
@@ -382,7 +382,7 @@ test("prorratea páginas y toma sólo los registros de la semana", () => {
   };
   const Canonico = { Id: "Meta" };
   const Periodo = {
-    Tipo: "Semana",
+    Tipo: "Trimestre",
     Inicio: "2026-08-17",
     Fin: "2026-08-23"
   };

@@ -6,6 +6,15 @@ Plantilla de registro de avance.
 
 Registros.
 
+- Fecha y hora: 2026-08-29 15:13:00.
+  Nota: Se corrigió el cálculo contextual de Metas para año, semestre,
+  trimestre, mes y semana. La fila, el panel general, el compromiso y el
+  trabajo operativo ahora usan el período consultado en vez de retomar la
+  meta anual; los avances se leen por rango y las familias de subobjetivos
+  agregan correctamente sus partes e hijos. Se ampliaron las regresiones de
+  detalle y ritmo para el caso trimestral.
+  Estado: Realizado.
+
 - Fecha y hora: 2026-08-23 23:32:31.
   Nota: Se mejoró `semaplan_buscar_global` para Decoteca con paginación
   real por `offset` y `limite`, orden estable por `Orden` e `Id`, filtros

@@ -70,7 +70,13 @@ test("separa meta global, cuota, compromiso y trabajo operativo", () => {
     Planes_Estado_Normalizado_Subobjetivo: (Sub) =>
       Sub.Hecha ? "Cumplido" : "Activo",
     Planes_Aporte_Meta_Efectivo: (Sub) => Sub.Aporte_Meta,
-    Planes_Avance_Real_Objetivo_En_Periodo: () => 0,
+    Planes_Compromiso_Objetivo_En_Periodo: () => ({
+      Total: 10,
+      Realizado: 5,
+      Cumplidos: Subs.slice(0, 5)
+    }),
+    Planes_Target_Contextual_Objetivo: () => 7.5,
+    Planes_Avance_Real_Objetivo_En_Periodo: () => 5,
     Planes_Carga_Trabajo_Objetivo: () => ({
       Calculable: true,
       Total: 10000,
@@ -199,7 +205,7 @@ test("no cuenta como compromiso las divisiones internas anidadas", () => {
   assert.equal(Resultado.Compromiso.Porcentaje, 100);
 });
 
-test("usa el avance global en la cuota cuando los subobjetivos no tienen target", () => {
+test("usa el avance del período aunque los subobjetivos no tengan target", () => {
   const Objetivo = {
     Id: "Texturas",
     Target_Total: 40000,
@@ -222,7 +228,13 @@ test("usa el avance global en la cuota cuando los subobjetivos no tienen target"
     }),
     Planes_Estado_Normalizado_Subobjetivo: () => "Activo",
     Planes_Aporte_Cumplido_Para_Resumen: () => 0,
-    Planes_Avance_Real_Objetivo_En_Periodo: () => 0,
+    Planes_Compromiso_Objetivo_En_Periodo: () => ({
+      Total: 10,
+      Realizado: 0,
+      Cumplidos: []
+    }),
+    Planes_Target_Contextual_Objetivo: () => 40000,
+    Planes_Avance_Real_Objetivo_En_Periodo: () => 21665,
     Planes_Progreso_Total_Objetivo_Efectivo: () => 21665,
     Planes_Carga_Trabajo_Objetivo: () => ({ Calculable: false }),
     Planes_Metrica_Progreso: (Realizado, Total) => ({
@@ -289,6 +301,55 @@ test("muestra el exceso real y limita solamente la barra visual", () => {
   assert.equal(Resultado.Porcentaje, 125);
   assert.equal(Resultado.Barra, 100);
   assert.equal(Resultado.Pendiente, 0);
+});
+
+test("agrega avances de partes e hijos en el trabajo contextual", () => {
+  const Contexto = {
+    Asegurar_Modelo_Planes: () => ({
+      Partes: {
+        Parte_Raiz: { Id: "Parte_Raiz", Subobjetivo_Id: "Raiz" },
+        Parte_Hija: { Id: "Parte_Hija", Subobjetivo_Id: "Hija" }
+      },
+      Avances: {
+        Avance_Raiz: {
+          Subobjetivo_Id: "Raiz",
+          Fecha: "2026-08-10",
+          Unidad: "Páginas",
+          Cantidad: 10
+        },
+        Avance_Hija: {
+          Subobjetivo_Id: "Hija",
+          Fecha: "2026-08-12",
+          Unidad: "Páginas",
+          Cantidad: 15
+        },
+        Avance_Parte: {
+          Parte_Id: "Parte_Hija",
+          Fecha: "2026-08-13",
+          Unidad: "Páginas",
+          Cantidad: 20
+        },
+        Avance_Fuera: {
+          Subobjetivo_Id: "Hija",
+          Fecha: "2026-10-01",
+          Unidad: "Páginas",
+          Cantidad: 50
+        }
+      }
+    }),
+    Planes_Subobjetivos_Familia_Ids: () => new Set(["Raiz", "Hija"]),
+    Planes_Fecha_Avance_Plan: (Avance) => Avance.Fecha,
+    Planes_Normalizar_Clave_Unidad_Ritmo: (Unidad) =>
+      Unidad.toLocaleLowerCase()
+  };
+  Cargar_Funciones(Contexto, ["Planes_Avances_Carga_Subobjetivo"]);
+  const Total = Contexto.Planes_Avances_Carga_Subobjetivo(
+    { Id: "Raiz" },
+    { Unidad_Clave: "páginas" },
+    "2026-07-01",
+    "2026-09-30"
+  );
+  assert.equal(Total, 45);
 });
 
 test("un exceso interno no compensa otro resultado pendiente", () => {

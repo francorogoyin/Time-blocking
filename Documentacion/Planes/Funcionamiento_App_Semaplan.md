@@ -1366,10 +1366,11 @@ Relaciones importantes.
   subobjetivos cumplidos contra los subobjetivos cargados para ese
   período; y `Trabajo operativo` compara unidades realizadas contra la
   carga uniforme total de esos subobjetivos.
-- En Semana, la fila colapsada usa la misma cuota prorrateada que el detalle
-  para porcentaje, realizado y pendiente; la meta madre expandida conserva
-  el resumen global. No toma el `Target_Total` ni el `Progreso_Total` crudos
-  de una proyección semanal.
+- En cada capa temporal, la fila colapsada usa la misma cuota contextual que
+  el detalle para porcentaje, realizado y pendiente; la meta madre expandida
+  conserva el resumen global. No toma el `Target_Total` ni el
+  `Progreso_Total` crudos de la meta anual, semestral, trimestral, mensual o
+  semanal proyectada.
 - `Trabajo operativo` muestra realizado sobre total en su cuenta principal.
   Debajo sólo desglosa las unidades pendientes y las que pertenecen a
   subobjetivos sin iniciar; no repite realizado ni muestra una descripción
@@ -1391,15 +1392,16 @@ Relaciones importantes.
   un cero o una equivalencia. La cuota usa las fechas activas y excepciones
   del hábito vinculado, junto con la unidad efectiva de su carga operativa.
 - `Planes_Carga_Trabajo_Objetivo()` construye un único inventario con
-  todos los subobjetivos medibles del compromiso. Cada uno aporta una
-  vez su target y su avance agregado; cuando el target deriva de sus
-  partes, usa ese total consolidado sin excluir el subobjetivo ni volver
-  a sumar las partes. Del mismo inventario salen total, realizado con
-  tope propio, pendiente y unidades de subobjetivos todavía sin avance.
-  Si faltan métricas muestra cobertura parcial como mínimo conocido; si
-  hay unidades distintas, no calcula una equivalencia ficticia. En una semana,
-  los subobjetivos sin fechas planeadas se incluyen con el peso de su período
-  padre, en vez de desaparecer de ese inventario.
+  todos los subobjetivos medibles del compromiso. Cada uno aporta una vez su
+  target y su avance agregado de toda su familia; cuando el target deriva de
+  sus partes, usa ese total consolidado sin excluir el subobjetivo ni volver
+  a sumar las partes. En una capa temporal, tanto el target como los avances
+  se restringen y prorratean por el rango consultado. Del mismo inventario
+  salen total, realizado, pendiente y unidades de subobjetivos todavía sin
+  avance. Si faltan métricas muestra cobertura parcial como mínimo conocido;
+  si hay unidades distintas, no calcula una equivalencia ficticia. En una
+  semana, los subobjetivos sin fechas planeadas se incluyen con el peso de su
+  período padre, en vez de desaparecer de ese inventario.
 - La `Pauta de hoy` usa el pool pendiente de unidades y los días activos
   restantes hasta el fin de la meta. El pool suma los targets de los
   subobjetivos medidos y resta el avance de cada uno con tope propio, de

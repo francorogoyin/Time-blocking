@@ -78731,9 +78731,9 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
         const Canonico = Datos?.Canonico || Objetivo;
         const Periodo_Contexto = Datos?.Periodo ||
           Planes_Periodo_Contexto_Objetivo(Objetivo);
-        const Es_Semanal = Periodo_Contexto?.Tipo === "Semana";
+        const Tiene_Periodo_Contextual = Boolean(Periodo_Contexto);
         const Global = Datos?.Global || null;
-        const Metrica_Contextual = Es_Semanal
+        const Metrica_Contextual = Tiene_Periodo_Contextual
           ? Datos?.Cuota || null
           : Global;
         const Target_Contextual = Number(Metrica_Contextual?.Total) || 0;
@@ -78744,7 +78744,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
         const Tiene_Meta_Contextual =
           Boolean(Metrica_Contextual?.Calculable) &&
           Target_Contextual > 0;
-        const Target = Es_Semanal
+        const Target = Tiene_Periodo_Contextual
           ? Target_Contextual
           : (
             Tiene_Meta_Contextual
@@ -82904,7 +82904,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
           Objetivo,
           Modelo
         );
-        const Metrica_Tarjeta = Resumen.Periodo?.Tipo === "Semana"
+        const Metrica_Tarjeta = Resumen.Periodo
           ? Resumen.Cuota
           : Resumen.Global;
         const Porcentaje = Metrica_Tarjeta?.Calculable
@@ -83625,13 +83625,13 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
           typeof Planes_Periodo_Contexto_Objetivo === "function"
             ? Planes_Periodo_Contexto_Objetivo(Objetivo, M)
             : null;
-        const Es_Semanal = Periodo_Contexto?.Tipo === "Semana";
+        const Tiene_Periodo_Contextual = Boolean(Periodo_Contexto);
         const Carga_Contexto = {
           Unidad_Clave: [...Claves][0] || ""
         };
         const Desglose = Medidos.map((Sub) => {
           const Target_Base = Number(Sub.Target_Total) || 0;
-          const Peso = Es_Semanal
+          const Peso = Tiene_Periodo_Contextual
             ? Planes_Peso_Subobjetivo_En_Periodo(
               Sub,
               Periodo_Contexto,
@@ -83643,7 +83643,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
             0,
             Planes_Progreso_Total_Subobjetivo(Sub, M)
           );
-          const Progreso_Periodo = Es_Semanal
+          const Progreso_Periodo = Tiene_Periodo_Contextual
             ? Math.max(
               0,
               Planes_Avances_Carga_Subobjetivo(
@@ -83655,7 +83655,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
               )
             )
             : Progreso_Global;
-          const Realizado_Item = Es_Semanal
+          const Realizado_Item = Tiene_Periodo_Contextual
             ? Progreso_Periodo
             : Math.min(Target, Progreso_Global);
           return {
@@ -83883,13 +83883,19 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
       ) {
         if (!Subobjetivo?.Id || !Carga?.Unidad_Clave) return 0;
         const M = Modelo || Asegurar_Modelo_Planes();
+        const Familia_Ids = Planes_Subobjetivos_Familia_Ids(
+          Subobjetivo.Id,
+          M
+        );
         const Partes_Ids = new Set(
           Object.values(M.Partes || {})
-            .filter((Parte) => Parte?.Subobjetivo_Id === Subobjetivo.Id)
+            .filter((Parte) =>
+              Familia_Ids.has(Parte?.Subobjetivo_Id)
+            )
             .map((Parte) => Parte.Id)
         );
         return Object.values(M.Avances || {}).reduce((Total, Avance) => {
-          const Pertenece = Avance?.Subobjetivo_Id === Subobjetivo.Id ||
+          const Pertenece = Familia_Ids.has(Avance?.Subobjetivo_Id) ||
             Partes_Ids.has(Avance?.Parte_Id);
           if (!Pertenece || Number(Avance.Cantidad) <= 0) return Total;
           const Fecha = Planes_Fecha_Avance_Plan(Avance);
@@ -84721,11 +84727,11 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
             const Info = Contexto.Items_Por_Id?.get?.(Sub.Id);
             return !Info?.Padre_Id;
           });
-        const Es_Semanal = Periodo?.Tipo === "Semana";
+        const Tiene_Periodo_Contextual = Boolean(Periodo);
         const Cumplidos_Global = Compromisos.filter((Sub) =>
           Planes_Estado_Normalizado_Subobjetivo(Sub) === "Cumplido"
         );
-        const Compromiso_Contexto = Es_Semanal
+        const Compromiso_Contexto = Tiene_Periodo_Contextual
           ? Planes_Compromiso_Objetivo_En_Periodo(
             Compromisos,
             Periodo,
@@ -84745,7 +84751,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
           (Number(Sub.Target_Total) || 0) > 0
         );
         let Avance_Cuota = 0;
-        if (Es_Semanal) {
+        if (Tiene_Periodo_Contextual) {
           Avance_Cuota = Planes_Avance_Real_Objetivo_En_Periodo(
             Canonico,
             Periodo
@@ -84769,7 +84775,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
         }
         const Target_Periodo = Math.max(
           0,
-          Es_Semanal
+          Tiene_Periodo_Contextual
             ? Planes_Target_Contextual_Objetivo(
               Canonico,
               Periodo,
