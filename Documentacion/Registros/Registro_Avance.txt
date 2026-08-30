@@ -6,6 +6,15 @@ Plantilla de registro de avance.
 
 Registros.
 
+- Fecha y hora: 2026-08-30 20:14:00.
+  Nota: Se rediseñó la entrada de Decoteca para hacer explícito su propósito,
+  mostrar las tecas con nombre e icono, priorizar búsqueda, estado y alta de
+  obra, y agrupar los filtros y el orden secundarios en un bloque desplegable.
+  Los estados vacíos ahora distinguen una teca sin obras de una búsqueda sin
+  resultados y ofrecen una continuación clara en el primer caso. Se añadieron
+  las traducciones correspondientes en español, inglés y portugués.
+  Estado: Realizado.
+
 - Fecha y hora: 2026-08-29 15:13:00.
   Nota: Se corrigió el cálculo contextual de Metas para año, semestre,
   trimestre, mes y semana. La fila, el panel general, el compromiso y el
