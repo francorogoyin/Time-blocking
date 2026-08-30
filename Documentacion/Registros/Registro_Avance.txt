@@ -6,6 +6,23 @@ Plantilla de registro de avance.
 
 Registros.
 
+- Fecha y hora: 2026-08-30 20:33:27.
+  Nota: Se hizo visible el uso de listas personales en Decoteca. Cada teca
+  muestra una banda de listas con conteos y filtro directo, y la ficha de
+  una obra permite asignarla a varias listas de esa misma teca. El guardado
+  actualiza sólo esas pertenencias, sin duplicar obras ni modificar otras
+  tecas; se agregó una regresión para esa preservación.
+  Estado: Realizado.
+
+- Fecha y hora: 2026-08-30 20:14:00.
+  Nota: Se rediseñó la entrada de Decoteca para hacer explícito su propósito,
+  mostrar las tecas con nombre e icono, priorizar búsqueda, estado y alta de
+  obra, y agrupar los filtros y el orden secundarios en un bloque desplegable.
+  Los estados vacíos ahora distinguen una teca sin obras de una búsqueda sin
+  resultados y ofrecen una continuación clara en el primer caso. Se añadieron
+  las traducciones correspondientes en español, inglés y portugués.
+  Estado: Realizado.
+
 - Fecha y hora: 2026-08-30 20:25:09.
   Nota: Se rediseñó la sección Decoteca con una cabecera editorial,
   navegación de tecas con conteos, filtros reorganizados, acción primaria

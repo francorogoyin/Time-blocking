@@ -39,7 +39,8 @@ function Crear_Entorno_Decoteca() {
     "Decoteca_Id_Lista_Desde_Filtro",
     "Decoteca_Lista_Personalizada_Por_Id",
     "Decoteca_Obra_Esta_En_Lista_Personalizada",
-    "Decoteca_Orden_Obra_En_Lista_Personalizada"
+    "Decoteca_Orden_Obra_En_Lista_Personalizada",
+    "Decoteca_Actualizar_Listas_De_Obra"
   ].forEach((Nombre) => {
     vm.runInContext(Extraer_Funcion(Nombre), Contexto);
   });
@@ -126,5 +127,53 @@ test("resuelve pertenencia y orden propio de cada lista", () => {
       "enero"
     ),
     Number.MAX_SAFE_INTEGER
+  );
+});
+
+test("guarda pertenencias múltiples sin tocar otras tecas", () => {
+  const Contexto = Crear_Entorno_Decoteca();
+  Contexto.Decoteca.Listas_Personalizadas = [
+    {
+      Id: "filosofia",
+      Teca_Id: "Biblioteca",
+      Obras: ["libro_1", "libro_2"]
+    },
+    {
+      Id: "releer",
+      Teca_Id: "Biblioteca",
+      Obras: ["libro_2"]
+    },
+    {
+      Id: "novedades",
+      Teca_Id: "Musicoteca",
+      Obras: ["album_1"]
+    }
+  ];
+
+  Contexto.Decoteca_Actualizar_Listas_De_Obra(
+    "libro_1",
+    "Biblioteca",
+    ["releer"]
+  );
+
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(Contexto.Decoteca.Listas_Personalizadas)),
+    [
+      {
+        Id: "filosofia",
+        Teca_Id: "Biblioteca",
+        Obras: ["libro_2"]
+      },
+      {
+        Id: "releer",
+        Teca_Id: "Biblioteca",
+        Obras: ["libro_2", "libro_1"]
+      },
+      {
+        Id: "novedades",
+        Teca_Id: "Musicoteca",
+        Obras: ["album_1"]
+      }
+    ]
   );
 });

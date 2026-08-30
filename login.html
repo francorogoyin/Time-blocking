@@ -15998,19 +15998,19 @@
 
       .Decoteca_Panel {
         position: relative;
-        width: min(1240px, calc(100vw - 28px));
-        max-width: 1240px;
-        height: min(90vh, 960px);
-        max-height: min(90vh, 960px);
+        width: min(1320px, calc(100vw - 28px));
+        max-width: 1320px;
+        height: min(92vh, 980px);
+        max-height: min(92vh, 980px);
       }
 
       .Decoteca_Cuerpo {
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 12px;
         min-height: 0;
         overflow: hidden;
-        padding: 20px 22px 22px;
+        padding: 22px 26px 24px;
       }
 
       .Config_Cerrar.Decoteca_Cerrar {
@@ -16020,37 +16020,74 @@
         z-index: 3;
       }
 
+      .Decoteca_Introduccion {
+        display: grid;
+        max-width: 660px;
+        gap: 3px;
+        padding-right: 46px;
+      }
+
+      .Decoteca_Kicker {
+        color: var(--Acento);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .Decoteca_Introduccion h2 {
+        margin: 0;
+        color: var(--Texto);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(25px, 3vw, 34px);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .Decoteca_Introduccion p {
+        max-width: 580px;
+        margin: 4px 0 0;
+        color: var(--Texto_Suave);
+        font-size: 13px;
+        font-weight: 650;
+        line-height: 1.4;
+      }
+
       .Decoteca_Tecas_Fila {
         display: flex;
-        gap: 12px;
-        align-items: flex-start;
+        gap: 7px;
+        align-items: center;
         flex: 0 0 auto;
-        margin-right: 44px;
-        min-height: 30px;
+        min-height: 42px;
         min-width: 0;
         overflow-x: auto;
-        padding: 2px 2px 5px;
+        padding: 1px 46px 4px 1px;
+        border-bottom: 1px solid rgba(143, 124, 98, 0.16);
       }
 
       .Decoteca_Teca_Btn,
       .Decoteca_Teca_Nueva {
-        display: grid;
-        place-items: start;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
         flex: 0 0 auto;
-        width: 28px;
-        height: 28px;
-        min-width: 28px;
-        padding: 0;
-        border: 0;
-        border-radius: 0;
-        background: transparent;
+        width: auto;
+        height: 34px;
+        min-width: 34px;
+        padding: 0 10px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        background: rgba(246, 241, 232, 0.68);
         color: var(--Texto);
         text-align: left;
         cursor: pointer;
-        opacity: 0.72;
+        opacity: 0.78;
         transition:
-          transform 120ms ease,
-          opacity 120ms ease;
+          background 120ms ease,
+          border-color 120ms ease,
+          color 120ms ease,
+          transform 120ms ease;
       }
 
       .Decoteca_Teca_Btn:hover,
@@ -16060,17 +16097,32 @@
       }
 
       .Decoteca_Teca_Btn.Activa {
+        border-color: color-mix(
+          in srgb,
+          var(--Teca_Color, var(--Acento)) 36%,
+          transparent
+        );
+        background: color-mix(
+          in srgb,
+          var(--Teca_Color, var(--Acento)) 12%,
+          var(--Panel)
+        );
+        color: var(--Teca_Color, var(--Acento));
         opacity: 1;
       }
 
       .Decoteca_Teca_Icono {
-        width: 22px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
         display: grid;
         place-items: center;
         flex: 0 0 auto;
-        border-radius: 0;
-        background: transparent;
+        border-radius: 999px;
+        background: color-mix(
+          in srgb,
+          var(--Teca_Color, var(--Acento)) 14%,
+          transparent
+        );
         color: var(--Teca_Color, var(--Acento));
         font-size: 16px;
         line-height: 1;
@@ -16078,7 +16130,18 @@
       }
 
       .Decoteca_Teca_Btn.Activa .Decoteca_Teca_Icono {
-        transform: scale(1.08);
+        transform: scale(1.04);
+      }
+
+      .Decoteca_Teca_Nombre {
+        display: block;
+        max-width: 145px;
+        overflow: hidden;
+        font-size: 12px;
+        font-weight: 850;
+        line-height: 1;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .Decoteca_Teca_Nueva {
@@ -16086,6 +16149,7 @@
         font-size: 16px;
         font-weight: 900;
         line-height: 1;
+        padding: 0 9px;
       }
 
       .Decoteca_Teca_Accion_Icono {
@@ -16095,6 +16159,110 @@
         color: currentColor;
         font-size: 16px;
         line-height: 1;
+      }
+
+      .Decoteca_Listas_Seccion {
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .Decoteca_Listas_Cabecera {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .Decoteca_Listas_Cabecera > span {
+        color: var(--Texto_Suave);
+        font-size: 10px;
+        font-weight: 880;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .Decoteca_Lista_Nueva_Btn {
+        min-height: 25px;
+        margin-left: auto;
+        padding: 0 4px;
+        border: 0;
+        border-radius: 5px;
+        background: transparent;
+        color: var(--Acento);
+        cursor: pointer;
+        font: inherit;
+        font-size: 11px;
+        font-weight: 850;
+      }
+
+      .Decoteca_Lista_Nueva_Btn:hover,
+      .Decoteca_Lista_Nueva_Btn:focus-visible {
+        background: rgba(12, 106, 95, 0.08);
+        outline: none;
+      }
+
+      .Decoteca_Listas_Fila {
+        display: flex;
+        gap: 6px;
+        min-width: 0;
+        overflow-x: auto;
+        padding: 1px 1px 4px;
+      }
+
+      .Decoteca_Lista_Btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex: 0 0 auto;
+        min-height: 30px;
+        padding: 0 10px;
+        border: 1px solid rgba(143, 124, 98, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.46);
+        color: var(--Texto_Suave);
+        cursor: pointer;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 780;
+        transition:
+          background 120ms ease,
+          border-color 120ms ease,
+          color 120ms ease;
+      }
+
+      .Decoteca_Lista_Btn:hover,
+      .Decoteca_Lista_Btn:focus-visible {
+        border-color: color-mix(
+          in srgb,
+          var(--Acento) 35%,
+          transparent
+        );
+        color: var(--Texto);
+        outline: none;
+      }
+
+      .Decoteca_Lista_Btn.Activa {
+        border-color: transparent;
+        background: var(--Acento);
+        color: #fff;
+      }
+
+      .Decoteca_Lista_Conteo {
+        display: grid;
+        min-width: 17px;
+        height: 17px;
+        place-items: center;
+        border-radius: 999px;
+        background: rgba(143, 124, 98, 0.12);
+        color: currentColor;
+        font-size: 10px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .Decoteca_Lista_Btn.Activa .Decoteca_Lista_Conteo {
+        background: rgba(255, 255, 255, 0.22);
       }
 
       .Decoteca_Vistas {
@@ -16126,11 +16294,86 @@
       }
 
       .Decoteca_Barra_Superior {
-        display: flex;
-        gap: 10px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: 10px;
+        row-gap: 8px;
         align-items: flex-end;
-        flex-wrap: nowrap;
         flex: 0 0 auto;
+      }
+
+      .Decoteca_Filtros_Principales {
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) minmax(126px, 0.34fr);
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .Decoteca_Filtros_Principales .Campo {
+        margin-bottom: 0;
+      }
+
+      .Decoteca_Filtros_Principales .Campo label,
+      .Decoteca_Filtros_Avanzados .Campo label {
+        padding-left: 2px;
+        text-align: left;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+
+      .Decoteca_Filtros_Principales .Campo input,
+      .Decoteca_Filtros_Principales .Campo select {
+        width: 100%;
+        min-height: 36px;
+        min-width: 0;
+        padding: 6px 9px;
+        font-size: 12px;
+      }
+
+      .Decoteca_Filtros_Avanzados {
+        grid-column: 1 / -1;
+        border: 1px solid rgba(143, 124, 98, 0.16);
+        border-radius: 12px;
+        background: rgba(246, 241, 232, 0.48);
+      }
+
+      .Decoteca_Filtros_Avanzados summary {
+        display: flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        color: var(--Texto_Suave);
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 860;
+        letter-spacing: 0.05em;
+        list-style: none;
+        text-transform: uppercase;
+      }
+
+      .Decoteca_Filtros_Avanzados summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .Decoteca_Filtros_Avanzados summary::after {
+        margin-left: auto;
+        color: var(--Acento);
+        content: "+";
+        font-size: 17px;
+        font-weight: 500;
+      }
+
+      .Decoteca_Filtros_Avanzados[open] summary::after {
+        content: "−";
+      }
+
+      .Decoteca_Filtros_Avanzados > p {
+        margin: -1px 12px 10px;
+        color: var(--Texto_Suave);
+        font-size: 12px;
+        font-weight: 650;
+        line-height: 1.35;
       }
 
       .Decoteca_Periodo_Resumen {
@@ -16168,11 +16411,9 @@
 
       .Decoteca_Filtros {
         display: grid;
-        grid-template-columns:
-          minmax(150px, 1.25fr)
-          repeat(7, minmax(0, 0.72fr));
-        gap: 6px;
-        flex: 1 1 auto;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        padding: 0 12px 12px;
       }
 
       .Decoteca_Filtros .Campo {
@@ -16295,6 +16536,10 @@
         font-size: 15px;
         font-weight: 900;
         cursor: pointer;
+      }
+
+      .Decoteca_Accion_Btn:not(.Secundaria) {
+        white-space: nowrap;
       }
 
       .Decoteca_Accion_Emoji {
@@ -16444,6 +16689,62 @@
         overflow-x: hidden;
         overflow-y: auto;
         padding: 2px 16px 18px;
+      }
+
+      .Decoteca_Vacio {
+        display: grid;
+        place-items: center;
+        align-content: center;
+        min-height: 260px;
+        padding: 28px;
+        border: 1px dashed rgba(143, 124, 98, 0.3);
+        border-radius: 14px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(246, 241, 232, 0.64),
+            rgba(255, 255, 255, 0.2)
+          );
+        color: var(--Texto_Suave);
+        text-align: center;
+      }
+
+      .Decoteca_Vacio::before {
+        width: 32px;
+        height: 42px;
+        margin-bottom: 12px;
+        border: 1.5px solid currentColor;
+        border-radius: 3px 10px 10px 3px;
+        content: "";
+        opacity: 0.58;
+        transform: perspective(70px) rotateY(-10deg);
+      }
+
+      .Decoteca_Vacio strong {
+        color: var(--Texto);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .Decoteca_Vacio p {
+        max-width: 340px;
+        margin: 6px 0 16px;
+        font-size: 13px;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .Decoteca_Vacio button {
+        min-height: 34px;
+        padding: 0 13px;
+        border: 1px solid var(--Acento);
+        border-radius: 8px;
+        background: var(--Acento);
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 850;
       }
 
       .Decoteca_Grilla.Modo_Readlist {
@@ -17951,6 +18252,76 @@
 
       .Decoteca_Form_Campo_Edit.Ancho {
         grid-column: 1 / -1;
+      }
+
+      .Decoteca_Form_Listas {
+        grid-column: 1 / -1;
+        min-width: 0;
+        margin: 0;
+        padding: 11px;
+        border: 1px solid rgba(143, 124, 98, 0.16);
+        border-radius: 10px;
+        background: rgba(246, 241, 232, 0.46);
+      }
+
+      .Decoteca_Form_Listas > span,
+      .Decoteca_Form_Listas legend {
+        padding: 0;
+        color: var(--Texto_Suave);
+        font-size: 10px;
+        font-weight: 850;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .Decoteca_Form_Listas p {
+        margin: 5px 0 9px;
+        color: var(--Texto_Suave);
+        font-size: 12px;
+        font-weight: 650;
+        line-height: 1.35;
+      }
+
+      .Decoteca_Form_Listas_Opciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .Decoteca_Form_Lista_Opcion {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 30px;
+        padding: 0 9px;
+        border: 1px solid rgba(143, 124, 98, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.58);
+        color: var(--Texto);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 760;
+      }
+
+      .Decoteca_Form_Lista_Opcion:has(input:checked) {
+        border-color: color-mix(
+          in srgb,
+          var(--Acento) 38%,
+          transparent
+        );
+        background: color-mix(
+          in srgb,
+          var(--Acento) 10%,
+          var(--Panel)
+        );
+      }
+
+      .Decoteca_Form_Lista_Opcion input {
+        width: 14px;
+        height: 14px;
+        min-height: 0;
+        margin: 0;
+        accent-color: var(--Acento);
       }
 
       .Decoteca_Form_Campo_Edit span {
@@ -19854,6 +20225,28 @@
           overflow: auto;
         }
 
+        .Decoteca_Introduccion {
+          padding-right: 34px;
+        }
+
+        .Decoteca_Introduccion h2 {
+          font-size: 28px;
+        }
+
+        .Decoteca_Tecas_Fila {
+          margin-right: 0;
+          padding-right: 1px;
+        }
+
+        .Decoteca_Teca_Btn,
+        .Decoteca_Teca_Nueva {
+          min-width: 34px;
+        }
+
+        .Decoteca_Teca_Nombre {
+          max-width: 102px;
+        }
+
         #Decoteca_Registro_Cuerpo .Planes_Registro_Filtros {
           grid-template-columns: 1fr;
         }
@@ -19865,6 +20258,14 @@
           grid-template-columns: 1fr;
           flex-direction: column;
           align-items: stretch;
+        }
+
+        .Decoteca_Filtros_Principales {
+          grid-template-columns: 1fr 0.72fr;
+        }
+
+        .Decoteca_Filtros_Avanzados {
+          width: 100%;
         }
 
         .Decoteca_Contenido {
@@ -19905,10 +20306,6 @@
 
         .Decoteca_Filtros {
           grid-template-columns: 1fr 1fr;
-        }
-
-        .Decoteca_Filtros .Campo:first-child {
-          grid-column: 1 / -1;
         }
 
         .Decoteca_Periodo_Personalizado {
@@ -29169,8 +29566,23 @@
             aria-label="Tecas"
             data-i18n-aria="decoteca.tecas"></div>
 
+          <section class="Decoteca_Listas_Seccion"
+            aria-labelledby="Decoteca_Listas_Titulo">
+            <div class="Decoteca_Listas_Cabecera">
+              <span id="Decoteca_Listas_Titulo"
+                data-i18n="decoteca.listas">Listas</span>
+              <button class="Decoteca_Lista_Nueva_Btn"
+                id="Decoteca_Listas_Nueva"
+                type="button"
+                data-i18n="decoteca.lista_nueva">Nueva lista</button>
+            </div>
+            <div class="Decoteca_Listas_Fila" id="Decoteca_Listas"
+              role="group"
+              aria-labelledby="Decoteca_Listas_Titulo"></div>
+          </section>
+
           <div class="Decoteca_Barra_Superior">
-            <div class="Decoteca_Filtros">
+            <div class="Decoteca_Filtros_Principales">
               <div class="Campo">
                 <label for="Decoteca_Buscar_Input"
                   data-i18n="decoteca.buscar">Buscar</label>
@@ -29195,6 +29607,15 @@
                     data-i18n="decoteca.estado_abandonada">Abandonada</option>
                 </select>
               </div>
+            </div>
+            <details class="Decoteca_Filtros_Avanzados">
+              <summary data-i18n="decoteca.filtros_avanzados">
+                Filtros y orden
+              </summary>
+              <p data-i18n="decoteca.filtros_ayuda">
+                Afiná el catálogo por lista, período, género u orden.
+              </p>
+              <div class="Decoteca_Filtros">
               <div class="Campo">
                 <label for="Decoteca_Filtro_Lista"
                   data-i18n="decoteca.lista_personal">Lista</label>
@@ -29243,7 +29664,8 @@
                   data-i18n="decoteca.orden_direccion">Direcci&oacute;n</label>
                 <select id="Decoteca_Orden_Direccion"></select>
               </div>
-            </div>
+              </div>
+            </details>
 
             <div class="Decoteca_Acciones_Superiores">
               <button class="Decoteca_Accion_Btn Secundaria"
@@ -33117,6 +33539,7 @@
           "decoteca.lista_pausadas": "Pausadas",
           "decoteca.lista_archivo": "Archivo",
           "decoteca.lista_personal": "Lista",
+          "decoteca.listas": "Listas",
           "decoteca.lista_nueva": "Nueva lista",
           "decoteca.lista_renombrar": "Renombrar lista",
           "decoteca.lista_borrar": "Borrar lista",
@@ -33139,6 +33562,10 @@
           "decoteca.lista_agregar": "Agregar a lista",
           "decoteca.lista_agregar_activa": "Agregar a esta lista",
           "decoteca.lista_quitar_activa": "Quitar de esta lista",
+          "decoteca.lista_editor_ayuda":
+            "Una obra puede pertenecer a varias listas.",
+          "decoteca.lista_editor_vacio":
+            "Creá una lista desde la barra de listas para clasificar esta obra.",
           "decoteca.prioridad": "Prioridad",
           "decoteca.prioridad_sin": "Sin prioridad",
           "decoteca.prioridad_alta": "Alta",
@@ -33242,6 +33669,12 @@
           "decoteca.vacio_teca_desc":
             "Agregá una obra para empezar a construir tu archivo.",
           "decoteca.filtros_limpiar": "Limpiar filtros",
+          "decoteca.vacio_filtrado":
+            "No hay obras que coincidan con esta búsqueda o filtros.",
+          "decoteca.vacio_accion": "Agregar obra",
+          "decoteca.filtros_avanzados": "Filtros y orden",
+          "decoteca.filtros_ayuda":
+            "Afiná el catálogo por lista, período, género u orden.",
           "decoteca.detalle_vacio":
             "Elegí una obra para ver su ficha y su plan.",
           "decoteca.detalle_titulo": "Ficha de obra",
@@ -38522,6 +38955,7 @@
           "decoteca.lista_pausadas": "Paused",
           "decoteca.lista_archivo": "Archive",
           "decoteca.lista_personal": "List",
+          "decoteca.listas": "Lists",
           "decoteca.lista_nueva": "New list",
           "decoteca.lista_renombrar": "Rename list",
           "decoteca.lista_borrar": "Delete list",
@@ -38544,6 +38978,10 @@
           "decoteca.lista_agregar": "Add to list",
           "decoteca.lista_agregar_activa": "Add to this list",
           "decoteca.lista_quitar_activa": "Remove from this list",
+          "decoteca.lista_editor_ayuda":
+            "A work can belong to several lists.",
+          "decoteca.lista_editor_vacio":
+            "Create a list from the list bar to classify this work.",
           "decoteca.prioridad": "Priority",
           "decoteca.prioridad_sin": "No priority",
           "decoteca.prioridad_alta": "High",
@@ -38647,6 +39085,12 @@
           "decoteca.vacio_teca_desc":
             "Add a work to start building your archive.",
           "decoteca.filtros_limpiar": "Clear filters",
+          "decoteca.vacio_filtrado":
+            "No works match this search or these filters.",
+          "decoteca.vacio_accion": "Add work",
+          "decoteca.filtros_avanzados": "Filters and sorting",
+          "decoteca.filtros_ayuda":
+            "Refine the catalog by list, period, genre or sort order.",
           "decoteca.detalle_vacio":
             "Choose a work to see its sheet and plan.",
           "decoteca.detalle_titulo": "Work sheet",
@@ -43838,6 +44282,7 @@
           "decoteca.lista_pausadas": "Pausadas",
           "decoteca.lista_archivo": "Arquivo",
           "decoteca.lista_personal": "Lista",
+          "decoteca.listas": "Listas",
           "decoteca.lista_nueva": "Nova lista",
           "decoteca.lista_renombrar": "Renomear lista",
           "decoteca.lista_borrar": "Excluir lista",
@@ -43860,6 +44305,10 @@
           "decoteca.lista_agregar": "Adicionar a lista",
           "decoteca.lista_agregar_activa": "Adicionar a esta lista",
           "decoteca.lista_quitar_activa": "Remover desta lista",
+          "decoteca.lista_editor_ayuda":
+            "Uma obra pode pertencer a varias listas.",
+          "decoteca.lista_editor_vacio":
+            "Crie uma lista na barra de listas para classificar esta obra.",
           "decoteca.prioridad": "Prioridade",
           "decoteca.prioridad_sin": "Sem prioridade",
           "decoteca.prioridad_alta": "Alta",
@@ -43963,6 +44412,12 @@
           "decoteca.vacio_teca_desc":
             "Adicione uma obra para comecar a construir seu arquivo.",
           "decoteca.filtros_limpiar": "Limpar filtros",
+          "decoteca.vacio_filtrado":
+            "Nenhuma obra corresponde a esta busca ou filtros.",
+          "decoteca.vacio_accion": "Adicionar obra",
+          "decoteca.filtros_avanzados": "Filtros e ordem",
+          "decoteca.filtros_ayuda":
+            "Refine o catalogo por lista, periodo, genero ou ordem.",
           "decoteca.detalle_vacio":
             "Escolha uma obra para ver ficha e plano.",
           "decoteca.detalle_titulo": "Ficha da obra",
@@ -59159,6 +59614,65 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
           .map((Lista) => [Lista.Id, Lista.Nombre]);
       }
 
+      function Decoteca_Render_Listas_Editor(Obra_Id, Teca_Id) {
+        const Listas = (Decoteca.Listas_Personalizadas || [])
+          .filter((Lista) => Lista.Teca_Id === Teca_Id);
+        if (!Listas.length) {
+          return `
+            <section class="Decoteca_Form_Listas Ancho">
+              <span>${Escape_Html(t("decoteca.listas"))}</span>
+              <p>${Escape_Html(t("decoteca.lista_editor_vacio"))}</p>
+            </section>
+          `;
+        }
+        return `
+          <fieldset class="Decoteca_Form_Listas Ancho">
+            <legend>${Escape_Html(t("decoteca.listas"))}</legend>
+            <p>${Escape_Html(t("decoteca.lista_editor_ayuda"))}</p>
+            <div class="Decoteca_Form_Listas_Opciones">
+              ${Listas.map((Lista) => `
+                <label class="Decoteca_Form_Lista_Opcion">
+                  <input type="checkbox" name="Decoteca_Form_Listas"
+                    value="${Escape_Html(Lista.Id)}"${
+                      Lista.Obras?.includes(Obra_Id) ? " checked" : ""
+                    }>
+                  <span>${Escape_Html(Lista.Nombre)}</span>
+                </label>
+              `).join("")}
+            </div>
+          </fieldset>
+        `;
+      }
+
+      function Decoteca_Leer_Listas_Form(Teca_Id) {
+        const Listas_Validas = new Set(
+          Decoteca_Opciones_Listas_Personalizadas(Teca_Id)
+            .map(([Id]) => Id)
+        );
+        return Array.from(document.querySelectorAll(
+          'input[name="Decoteca_Form_Listas"]:checked'
+        ))
+          .map((Input) => Input.value)
+          .filter((Id) => Listas_Validas.has(Id));
+      }
+
+      function Decoteca_Actualizar_Listas_De_Obra(
+        Obra_Id,
+        Teca_Id,
+        Listas_Ids
+      ) {
+        const Seleccionadas = new Set(Listas_Ids || []);
+        Decoteca.Listas_Personalizadas =
+          Decoteca.Listas_Personalizadas.map((Lista) => {
+            if (Lista.Teca_Id !== Teca_Id) return Lista;
+            const Obras = Array.isArray(Lista.Obras)
+              ? Lista.Obras.filter((Id) => Id !== Obra_Id)
+              : [];
+            if (Seleccionadas.has(Lista.Id)) Obras.push(Obra_Id);
+            return { ...Lista, Obras };
+          });
+      }
+
       async function Decoteca_Crear_Lista_Personalizada() {
         const Nombre = String(await Mostrar_Dialogo_Con_Texto(
           t("decoteca.lista_nueva_titulo"),
@@ -59542,6 +60056,53 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
 
       function Decoteca_Render_Vistas() {
         Decoteca_Vista = "Catalogo";
+      }
+
+      function Decoteca_Render_Listas() {
+        const Host = Decoteca_El("Decoteca_Listas");
+        if (!Host) return;
+        const Obras_Teca = Decoteca_Obras_Teca();
+        const Obras_Ids = new Set(Obras_Teca.map((Obra) => Obra.Id));
+        const Listas = (Decoteca.Listas_Personalizadas || [])
+          .filter((Lista) => Lista.Teca_Id === Decoteca_Teca_Activa);
+        const Boton = (Valor, Nombre, Cantidad) => `
+          <button type="button"
+            class="Decoteca_Lista_Btn${
+              Decoteca_Filtro_Lista === Valor ? " Activa" : ""
+            }"
+            aria-pressed="${
+              Decoteca_Filtro_Lista === Valor ? "true" : "false"
+            }"
+            data-decoteca-lista="${Escape_Html(Valor)}">
+            <span>${Escape_Html(Nombre)}</span>
+            <span class="Decoteca_Lista_Conteo" aria-hidden="true">
+              ${Cantidad}
+            </span>
+          </button>
+        `;
+        Host.innerHTML = [
+          Boton("Todas", t("decoteca.lista_todas"), Obras_Teca.length),
+          ...Listas.map((Lista) => Boton(
+            Decoteca_Id_Lista_Filtro(Lista.Id),
+            Lista.Nombre,
+            (Lista.Obras || []).filter((Id) => Obras_Ids.has(Id)).length
+          ))
+        ].join("");
+      }
+
+      function Decoteca_Cambiar_Filtro_Lista(Filtro) {
+        const Valores_Validos = new Set([
+          "Todas",
+          ...(Decoteca.Listas_Personalizadas || [])
+            .filter((Lista) => Lista.Teca_Id === Decoteca_Teca_Activa)
+            .map((Lista) => Decoteca_Id_Lista_Filtro(Lista.Id))
+        ]);
+        if (!Valores_Validos.has(Filtro)) return;
+        Decoteca_Filtro_Lista = Filtro;
+        Decoteca_Limpiar_Seleccion_Multiple();
+        const Select = Decoteca_El("Decoteca_Filtro_Lista");
+        if (Select) Select.value = Filtro;
+        Render_Decoteca();
       }
 
       function Decoteca_Actualizar_Menu_Acciones_UI() {
@@ -61786,6 +62347,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
                   t("decoteca.origen"),
                   Valor.Origen
                 )}
+                ${Decoteca_Render_Listas_Editor(Valor.Id, Teca.Id)}
                 <label class="Decoteca_Form_Campo_Edit Ancho">
                   <span>${Escape_Html(t("decoteca.motivo"))}</span>
                   <textarea id="Decoteca_Form_Motivo">${
@@ -63788,6 +64350,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
         Decoteca_Leer_Filtros();
         Decoteca_Cerrar_Menu_Acciones();
         Decoteca_Actualizar_Estado_Orden_UI();
+        Decoteca_Render_Listas();
         if (Decoteca_Editor_Modo === "Detalle") {
           Decoteca_Seleccion_Id = "";
         }
@@ -63966,6 +64529,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
         Decoteca_Render_Tecas();
         Decoteca_Render_Vistas();
         Decoteca_Render_Filtros();
+        Decoteca_Render_Listas();
         Decoteca_Leer_Filtros();
         Decoteca_Render_Contenido_Principal();
       }
@@ -64427,6 +64991,7 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
               ? (Existente?.Orden ?? Obra.Orden)
               : Decoteca_Orden_Nueva_Obra(Obra.Teca_Id)
         });
+        const Listas_Ids = Decoteca_Leer_Listas_Form(Obra_Final.Teca_Id);
         if (Indice >= 0) {
           Decoteca.Obras[Indice] = Obra_Final;
         } else {
@@ -64435,6 +65000,11 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
           );
           Decoteca.Obras.unshift(Obra_Final);
         }
+        Decoteca_Actualizar_Listas_De_Obra(
+          Obra_Final.Id,
+          Obra_Final.Teca_Id,
+          Listas_Ids
+        );
         Decoteca = Normalizar_Decoteca(Decoteca);
         Decoteca_Teca_Activa = Obra_Final.Teca_Id;
         Decoteca_Seleccion_Id = Obra_Final.Id;
@@ -144362,6 +144932,11 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
             Ev.stopPropagation();
             return;
           }
+          if (Target.closest("[data-decoteca-nueva]")) {
+            Ev.preventDefault();
+            Decoteca_Abrir_Nuevo();
+            return;
+          }
           const Multi_Btn = Target.closest(
             "[data-decoteca-multi-accion]"
           );
@@ -144566,6 +145141,15 @@ const El_Baul_Nuevo_Titulo = document.getElementById(
             Decoteca_Abrir_Editar_Teca();
           }
         });
+      document.getElementById("Decoteca_Listas")
+        ?.addEventListener("click", (Ev) => {
+          const Boton = Decoteca_Evento_Elemento(Ev)
+            ?.closest?.("[data-decoteca-lista]");
+          if (!Boton) return;
+          Decoteca_Cambiar_Filtro_Lista(Boton.dataset.decotecaLista);
+        });
+      document.getElementById("Decoteca_Listas_Nueva")
+        ?.addEventListener("click", Decoteca_Crear_Lista_Personalizada);
       document.getElementById("Decoteca_Detalle")
         ?.addEventListener("click", (Ev) => {
           Ev.stopPropagation();
