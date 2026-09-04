@@ -1,0 +1,85 @@
+{
+  "Titulo": "Ética mínima",
+  "Autor": "Cortina, Adela",
+  "Anio": 1986,
+  "Genero": "No ficción",
+  "Fecha_Inicio": null,
+  "Fecha_Fin": null,
+  "Numero_Paginas_Total": 134,
+  "Partes": [
+    {
+      "Orden": 0,
+      "Titulo": "Prólogo",
+      "Pagina_Inicio": 6,
+      "Pagina_Fin": 8,
+      "Numero_Paginas": 3,
+      "Emoji": "📘"
+    },
+    {
+      "Orden": 1,
+      "Titulo": "Prefacio a las ediciones segunda y tercera",
+      "Pagina_Inicio": 9,
+      "Pagina_Fin": 10,
+      "Numero_Paginas": 2,
+      "Emoji": "📝"
+    },
+    {
+      "Orden": 2,
+      "Titulo": "Prefacio a la sexta edición",
+      "Pagina_Inicio": 11,
+      "Pagina_Fin": 13,
+      "Numero_Paginas": 3,
+      "Emoji": "📙"
+    },
+    {
+      "Orden": 3,
+      "Titulo": "Introducción",
+      "Pagina_Inicio": 14,
+      "Pagina_Fin": 15,
+      "Numero_Paginas": 2,
+      "Emoji": "🌱"
+    },
+    {
+      "Orden": 4,
+      "Titulo": "I. El ámbito de la ética",
+      "Pagina_Inicio": 16,
+      "Pagina_Fin": 40,
+      "Numero_Paginas": 25,
+      "Emoji": "⚖️"
+    },
+    {
+      "Orden": 5,
+      "Titulo": "II. El problema de la fundamentación",
+      "Pagina_Inicio": 41,
+      "Pagina_Fin": 70,
+      "Numero_Paginas": 30,
+      "Emoji": "🧭"
+    },
+    {
+      "Orden": 6,
+      "Titulo": "III. Ética y política: una moral para la democracia",
+      "Pagina_Inicio": 71,
+      "Pagina_Fin": 99,
+      "Numero_Paginas": 29,
+      "Emoji": "🏛️"
+    },
+    {
+      "Orden": 7,
+      "Titulo": "IV. ¿Ética sin religión?",
+      "Pagina_Inicio": 100,
+      "Pagina_Fin": 129,
+      "Numero_Paginas": 30,
+      "Emoji": "🕯️"
+    },
+    {
+      "Orden": 8,
+      "Titulo": "Epílogo: ¿Virtud o felicidad? En favor de una ética de mínimos",
+      "Pagina_Inicio": 130,
+      "Pagina_Fin": 139,
+      "Numero_Paginas": 10,
+      "Emoji": "🎯"
+    }
+  ],
+  "Descripcion": "Una introducción breve y argumentada a la ética, su fundamentación, su vínculo con la democracia y una ética de mínimos.",
+  "Subgenero": "Ética"
+}

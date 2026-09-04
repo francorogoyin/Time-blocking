@@ -6,6 +6,13 @@ Plantilla de registro de avance.
 
 Registros.
 
+- Fecha y hora: 2026-09-04 16:20:24.
+  Nota: Se cargó en Lectofilia 2026 Ética mínima, de Adela Cortina,
+  organizada en nueve bloques de primer nivel: prólogo, prefacios,
+  introducción, cuatro capítulos y epílogo. La estructura suma 134
+  páginas y quedó verificada en la aplicación.
+  Estado: Realizado.
+
 - Fecha y hora: 2026-09-03 23:30:27.
   Nota: Se corrigió la reprogramación de subobjetivos con una fecha propia.
   El selector ya no toma como referencia el inicio del objetivo anual: usa
