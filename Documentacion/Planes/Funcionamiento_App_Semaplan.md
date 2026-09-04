@@ -1338,6 +1338,11 @@ Relaciones importantes.
   restante. La rama original queda marcada como `Reprogramado`; al
   reactivarla, sus avances se devuelven a la rama original y la copia
   queda fuera de servicio.
+- El límite de ese período posterior es el vencimiento propio del
+  subobjetivo (`Fecha_Objetivo` y, en su ausencia, `Fecha_Inicio`). Si
+  no tiene fecha propia, se usa el final de su período madre. Así, un
+  libro planificado para octubre-diciembre no puede reprogramarse por
+  defecto a una semana anterior del mismo año.
 - El destino de reprogramación se elige en un árbol transitorio por año,
   capa y período. Las ramas se expanden o contraen con `+` y `-`; el
   período elegido se conserva desde esa lista, incluso si fue generado

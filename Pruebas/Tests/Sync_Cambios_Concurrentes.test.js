@@ -799,10 +799,10 @@ test("el selector bloquea releases obsoletos aunque compartan esquema", () => {
       "utf8"
     )
   );
-  const Actual = Manifest.find((Item) => Item.Id === "1.16.1");
+  const Actual = Manifest.find((Item) => Item.Id === "1.16.2");
 
   assert.equal(Actual?.Estado, "stable");
-  assert.equal(Actual?.Archivo, "Semaplan_Version_1_16_1.html");
+  assert.equal(Actual?.Archivo, "Semaplan_Version_1_16_2.html");
   assert.equal(Actual?.Esquema_Estado_Min, 14);
   assert.equal(Actual?.Esquema_Estado_Max, 14);
   assert.match(

@@ -6,6 +6,15 @@ Plantilla de registro de avance.
 
 Registros.
 
+- Fecha y hora: 2026-09-03 23:30:27.
+  Nota: Se corrigió la reprogramación de subobjetivos con una fecha propia.
+  El selector ya no toma como referencia el inicio del objetivo anual: usa
+  el vencimiento del subobjetivo y solo ofrece períodos que empiecen después.
+  En particular, `La mente consciente`, planificada de octubre a diciembre,
+  deja de proponer semanas pasadas de 2026 como destino. Se agregó regresión
+  para ese caso y se publicó la release 1.16.2 con esquema 14.
+  Estado: Realizado.
+
 - Fecha y hora: 2026-09-03 23:07:18.
   Nota: Se reparó la reprogramación de subobjetivos cuando el destino es
   un período futuro generado al abrir el selector. El destino ahora se

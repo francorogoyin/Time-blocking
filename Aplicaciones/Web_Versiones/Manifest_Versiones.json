@@ -1,5 +1,13 @@
 [
   {
+    "Id": "1.16.2",
+    "Archivo": "Semaplan_Version_1_16_2.html",
+    "Estado": "stable",
+    "Fecha_Publicacion": "2026-09-03",
+    "Esquema_Estado_Min": 14,
+    "Esquema_Estado_Max": 14
+  },
+  {
     "Id": "1.16.1",
     "Archivo": "Semaplan_Version_1_16_1.html",
     "Estado": "stable",

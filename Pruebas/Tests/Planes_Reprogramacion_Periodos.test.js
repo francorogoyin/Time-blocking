@@ -24,12 +24,18 @@ function Extraer_Funcion(Nombre) {
 
 function Crear_Contexto() {
   const Contexto = {
-    Planes_Tipos: ["Anio", "Semestre", "Trimestre", "Mes", "Semana"]
+    Planes_Tipos: ["Anio", "Semestre", "Trimestre", "Mes", "Semana"],
+    Planes_Normalizar_Fecha_Comparacion: (Fecha) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(String(Fecha || ""))
+        ? String(Fecha)
+        : ""
   };
   vm.createContext(Contexto);
   [
     "Planes_Periodos_Destino_Agrupados",
-    "Planes_Periodo_Destino_Elegido"
+    "Planes_Periodo_Destino_Elegido",
+    "Planes_Periodo_Destino_Es_Posterior",
+    "Planes_Fecha_Limite_Reprogramacion"
   ].forEach((Nombre) => {
     vm.runInContext(Extraer_Funcion(Nombre), Contexto);
   });
@@ -89,4 +95,33 @@ test("devuelve un período futuro creado para la selección", () => {
   );
 
   assert.deepEqual(JSON.parse(JSON.stringify(Resultado)), Periodo_Futuro);
+});
+
+test("reprograma después del vencimiento propio del subobjetivo", () => {
+  const Contexto = Crear_Contexto();
+  const Limite = Contexto.Planes_Fecha_Limite_Reprogramacion([
+    {
+      Fecha_Inicio: "2026-10-01",
+      Fecha_Objetivo: "2026-12-31"
+    }
+  ], {
+    Inicio: "2026-01-01",
+    Fin: "2026-12-31"
+  });
+
+  assert.equal(Limite, "2026-12-31");
+  assert.equal(
+    Contexto.Planes_Periodo_Destino_Es_Posterior(
+      { Inicio: "2026-01-05" },
+      Limite
+    ),
+    false
+  );
+  assert.equal(
+    Contexto.Planes_Periodo_Destino_Es_Posterior(
+      { Inicio: "2027-01-04" },
+      Limite
+    ),
+    true
+  );
 });
