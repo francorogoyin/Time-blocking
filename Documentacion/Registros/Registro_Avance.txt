@@ -7,6 +7,14 @@ Plantilla de registro de avance.
 Registros.
 
 - Fecha y hora: 2026-09-03 23:07:18.
+  Nota: Se reparó la reprogramación de subobjetivos cuando el destino es
+  un período futuro generado al abrir el selector. El destino ahora se
+  elige en un árbol Año → capa → período, con expansiones `+` y `-`,
+  selección visible y confirmación explícita. Se agregó la regresión de
+  destinos dinámicos y se publicó la release 1.16.1 con esquema 14.
+  Estado: Realizado.
+
+- Fecha y hora: 2026-09-03 23:07:18.
   Nota: Se cargó en Lectofilia 2026 la edición Colihue de Ética a
   Nicómaco, de Aristóteles, como un libro de 473 páginas: introducción y
   los diez libros. La estructura quedó sin avance inicial y con las

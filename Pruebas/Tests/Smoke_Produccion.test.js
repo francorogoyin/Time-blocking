@@ -3,7 +3,7 @@ const crypto = require("node:crypto");
 const test = require("node:test");
 
 const Origen = "https://semaplan.com";
-const Version_Actual = "1.16.0";
+const Version_Actual = "1.16.1";
 
 async function Descargar_Texto(Ruta) {
   const Url = new URL(Ruta, Origen);
@@ -70,7 +70,7 @@ test("produccion bloquea releases obsoletos", async () => {
     return Item.Id === Version_Actual;
   });
   assert.equal(Actual?.Estado, "stable");
-  assert.equal(Actual?.Archivo, "Semaplan_Version_1_16_0.html");
+  assert.equal(Actual?.Archivo, "Semaplan_Version_1_16_1.html");
   assert.equal(Actual?.Esquema_Estado_Min, 14);
   assert.equal(Actual?.Esquema_Estado_Max, 14);
 });

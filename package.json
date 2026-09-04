@@ -1,6 +1,6 @@
 {
   "name": "semaplan",
-  "version": "1.16.0",
+  "version": "1.16.1",
   "description": "Aplicación web de planificación semanal.",
   "main": "Aplicaciones/Desktop/Main_Process.js",
   "author": "",
@@ -11,6 +11,7 @@
     "test:sesiones": "node --test Pruebas/Tests/Sesiones_Operativas.test.js",
     "test:ritmo-meta": "node --test Pruebas/Tests/Ritmo_Meta_Habito.test.js",
     "test:detalle-meta": "node --test Pruebas/Tests/Detalle_Objetivo_Progreso.test.js",
+    "test:planes-reprogramacion": "node --test Pruebas/Tests/Planes_Reprogramacion_Periodos.test.js",
     "test:planes-semana": "node --test Pruebas/Tests/Planes_Semana_Independiente.test.js",
     "test:nutrifit": "node --test Pruebas/Tests/Nutrifit_Modelo.test.js",
     "test:decoteca-listas": "node --test Pruebas/Tests/Decoteca_Listas.test.js",

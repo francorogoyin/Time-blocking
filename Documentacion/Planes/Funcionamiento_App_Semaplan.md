@@ -1338,6 +1338,10 @@ Relaciones importantes.
   restante. La rama original queda marcada como `Reprogramado`; al
   reactivarla, sus avances se devuelven a la rama original y la copia
   queda fuera de servicio.
+- El destino de reprogramación se elige en un árbol transitorio por año,
+  capa y período. Las ramas se expanden o contraen con `+` y `-`; el
+  período elegido se conserva desde esa lista, incluso si fue generado
+  para ofrecer un horizonte futuro y todavía no existía en el modelo.
 - La lectura de cada subobjetivo muestra la métrica restante junto con
   las horas restantes cuando existe una unidad calculable. La lectura
   operativa de un hábito asociado también informa cuántos días activos
