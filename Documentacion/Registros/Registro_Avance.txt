@@ -6,6 +6,13 @@ Plantilla de registro de avance.
 
 Registros.
 
+- Fecha y hora: 2026-09-03 23:07:18.
+  Nota: Se cargó en Lectofilia 2026 la edición Colihue de Ética a
+  Nicómaco, de Aristóteles, como un libro de 473 páginas: introducción y
+  los diez libros. La estructura quedó sin avance inicial y con las
+  partes verificadas tras recargar.
+  Estado: Realizado.
+
 - Fecha y hora: 2026-08-30 23:12:55.
   Nota: Se restauró la interfaz anterior de Decoteca y se retiraron los dos
   rediseños visuales recientes. Se conservaron las listas personales, el

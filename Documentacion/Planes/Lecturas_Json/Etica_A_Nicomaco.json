@@ -1,109 +1,101 @@
 {
-  "Titulo": "ética a Nicómaco",
+  "Titulo": "Ética a Nicómaco",
   "Autor": "Aristóteles",
   "Anio": "c. 350 a. C.",
   "Genero": "No ficción",
   "Fecha_Inicio": null,
   "Fecha_Fin": null,
-  "Numero_Paginas_Total": 282,
+  "Numero_Paginas_Total": 473,
   "Partes": [
     {
       "Orden": 0,
-      "Titulo": "Introducción a las éticas",
+      "Titulo": "Introducción",
       "Pagina_Inicio": 1,
-      "Pagina_Fin": 81,
-      "Numero_Paginas": 81,
+      "Pagina_Fin": 75,
+      "Numero_Paginas": 75,
       "Emoji": "📘"
     },
     {
       "Orden": 1,
-      "Titulo": "Nota introductoria a nuestra versión",
-      "Pagina_Inicio": 82,
-      "Pagina_Fin": 86,
-      "Numero_Paginas": 5,
-      "Emoji": "📝"
+      "Titulo": "Libro I",
+      "Pagina_Inicio": 76,
+      "Pagina_Fin": 123,
+      "Numero_Paginas": 48,
+      "Emoji": "🌱"
     },
     {
       "Orden": 2,
-      "Titulo": "Ética nicomáquea. Libro I. Sobre la felicidad",
-      "Pagina_Inicio": 87,
-      "Pagina_Fin": 106,
-      "Numero_Paginas": 20,
-      "Emoji": "🧭"
-    },
-    {
-      "Orden": 3,
-      "Titulo": "Ética nicomáquea. Libro II. Naturaleza de la virtud ética",
-      "Pagina_Inicio": 107,
-      "Pagina_Fin": 120,
-      "Numero_Paginas": 14,
+      "Titulo": "Libro II",
+      "Pagina_Inicio": 124,
+      "Pagina_Fin": 151,
+      "Numero_Paginas": 28,
       "Emoji": "⚖️"
     },
     {
+      "Orden": 3,
+      "Titulo": "Libro III",
+      "Pagina_Inicio": 152,
+      "Pagina_Fin": 193,
+      "Numero_Paginas": 42,
+      "Emoji": "🧭"
+    },
+    {
       "Orden": 4,
-      "Titulo": "Ética nicomáquea. Libro III. Acciones voluntarias e involuntarias",
-      "Pagina_Inicio": 121,
-      "Pagina_Fin": 142,
-      "Numero_Paginas": 22,
-      "Emoji": "🧠"
+      "Titulo": "Libro IV",
+      "Pagina_Inicio": 194,
+      "Pagina_Fin": 227,
+      "Numero_Paginas": 34,
+      "Emoji": "🏛️"
     },
     {
       "Orden": 5,
-      "Titulo": "Ética nicomáquea. Libro IV. Examen de las virtudes éticas",
-      "Pagina_Inicio": 143,
-      "Pagina_Fin": 162,
-      "Numero_Paginas": 20,
-      "Emoji": "🛡️"
+      "Titulo": "Libro V",
+      "Pagina_Inicio": 228,
+      "Pagina_Fin": 273,
+      "Numero_Paginas": 46,
+      "Emoji": "⚖️"
     },
     {
       "Orden": 6,
-      "Titulo": "Ética nicomáquea. Libro V. Examen de las virtudes éticas (cont.)",
-      "Pagina_Inicio": 163,
-      "Pagina_Fin": 183,
-      "Numero_Paginas": 21,
-      "Emoji": "🔎"
+      "Titulo": "Libro VI",
+      "Pagina_Inicio": 274,
+      "Pagina_Fin": 307,
+      "Numero_Paginas": 34,
+      "Emoji": "🧠"
     },
     {
       "Orden": 7,
-      "Titulo": "Ética nicomáquea. Libro VI. Examen de las virtudes intelectuales",
-      "Pagina_Inicio": 184,
-      "Pagina_Fin": 198,
-      "Numero_Paginas": 15,
-      "Emoji": "📖"
-    },
-    {
-      "Orden": 8,
-      "Titulo": "Ética nicomáquea. Libro VII. Continencia e incontinencia",
-      "Pagina_Inicio": 199,
-      "Pagina_Fin": 221,
-      "Numero_Paginas": 23,
+      "Titulo": "Libro VII",
+      "Pagina_Inicio": 308,
+      "Pagina_Fin": 357,
+      "Numero_Paginas": 50,
       "Emoji": "🔥"
     },
     {
-      "Orden": 9,
-      "Titulo": "Ética nicomáquea. Libro VIII. Sobre la amistad",
-      "Pagina_Inicio": 222,
-      "Pagina_Fin": 241,
-      "Numero_Paginas": 20,
+      "Orden": 8,
+      "Titulo": "Libro VIII",
+      "Pagina_Inicio": 358,
+      "Pagina_Fin": 395,
+      "Numero_Paginas": 38,
       "Emoji": "🤝"
     },
     {
-      "Orden": 10,
-      "Titulo": "Ética nicomáquea. Libro IX. Sobre la amistad (cont.)",
-      "Pagina_Inicio": 242,
-      "Pagina_Fin": 260,
-      "Numero_Paginas": 19,
+      "Orden": 9,
+      "Titulo": "Libro IX",
+      "Pagina_Inicio": 396,
+      "Pagina_Fin": 429,
+      "Numero_Paginas": 34,
       "Emoji": "💬"
     },
     {
-      "Orden": 11,
-      "Titulo": "Ética nicomáquea. Libro X. Naturaleza del placer y de la felicidad",
-      "Pagina_Inicio": 261,
-      "Pagina_Fin": 282,
-      "Numero_Paginas": 22,
+      "Orden": 10,
+      "Titulo": "Libro X",
+      "Pagina_Inicio": 430,
+      "Pagina_Fin": 473,
+      "Numero_Paginas": 44,
       "Emoji": "🎯"
     }
   ],
-  "Descripcion": "Tratado clásico sobre la virtud, la prudencia y la felicidad como práctica, no como simple teoría.",
-  "Subgenero": "ética"
+  "Descripcion": "Edición Colihue traducida y anotada por Eduardo Sinnott: una lectura de la virtud, la prudencia, la amistad y la felicidad como práctica.",
+  "Subgenero": "Ética"
 }
